@@ -1,0 +1,5 @@
+状态：未更新。
+只读预检确认 LinkerHand HOME=~，~/calibration_board/ 已存在，superseded/ 尚未存在。
+本地标准流程闭环门槛失败，按裁决3停止发布。
+没有向采集台写入文件，没有迁移v1，没有运行标定程序或安装依赖。
+远端现有v1目录为 ~/calibration_board/；不是v1.1副本，旧板应停止打印。

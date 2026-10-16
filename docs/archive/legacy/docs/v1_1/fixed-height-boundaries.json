@@ -1,0 +1,102 @@
+[
+  {
+    "camera": "1280",
+    "fixed_height_m": 0.65,
+    "target_cell_px": 3.5,
+    "feasible_min_distance_m": 0.8,
+    "cell_px_at_feasible_min_distance": 4.657255872260941,
+    "cell_px_at_1m": 2.950798103238144,
+    "distance_boundary_within_work_domain_m": 0.9168212890625,
+    "note": "null表示在给定高度、0.8–1m距离、板面角≤60度的可行域中未找到满足采样量的距离；不代表无可检出图像。"
+  },
+  {
+    "camera": "1280",
+    "fixed_height_m": 0.7,
+    "target_cell_px": 3.5,
+    "feasible_min_distance_m": 0.8082903768654761,
+    "cell_px_at_feasible_min_distance": 5.092732175709781,
+    "cell_px_at_1m": 3.2250855226026314,
+    "distance_boundary_within_work_domain_m": 0.9601111996297857,
+    "note": "null表示在给定高度、0.8–1m距离、板面角≤60度的可行域中未找到满足采样量的距离；不代表无可检出图像。"
+  },
+  {
+    "camera": "1280",
+    "fixed_height_m": 0.725,
+    "target_cell_px": 3.5,
+    "feasible_min_distance_m": 0.8371578903249574,
+    "cell_px_at_feasible_min_distance": 4.951809241802828,
+    "cell_px_at_1m": 3.367909343211094,
+    "distance_boundary_within_work_domain_m": 0.9812648085487392,
+    "note": "null表示在给定高度、0.8–1m距离、板面角≤60度的可行域中未找到满足采样量的距离；不代表无可检出图像。"
+  },
+  {
+    "camera": "1280",
+    "fixed_height_m": 0.75,
+    "target_cell_px": 3.5,
+    "feasible_min_distance_m": 0.8660254037844387,
+    "cell_px_at_feasible_min_distance": 4.818366873268869,
+    "cell_px_at_1m": 3.5151963589638147,
+    "distance_boundary_within_work_domain_m": 1.0,
+    "note": "null表示在给定高度、0.8–1m距离、板面角≤60度的可行域中未找到满足采样量的距离；不代表无可检出图像。"
+  },
+  {
+    "camera": "1280",
+    "fixed_height_m": 0.8,
+    "target_cell_px": 3.5,
+    "feasible_min_distance_m": 0.9237604307034013,
+    "cell_px_at_feasible_min_distance": 4.571698509742782,
+    "cell_px_at_1m": 3.825942566216591,
+    "distance_boundary_within_work_domain_m": 1.0,
+    "note": "null表示在给定高度、0.8–1m距离、板面角≤60度的可行域中未找到满足采样量的距离；不代表无可检出图像。"
+  },
+  {
+    "camera": "640",
+    "fixed_height_m": 0.65,
+    "target_cell_px": 3.0,
+    "feasible_min_distance_m": 0.8,
+    "cell_px_at_feasible_min_distance": 3.1048379479259025,
+    "cell_px_at_1m": 1.9671991809933806,
+    "distance_boundary_within_work_domain_m": 0.81256103515625,
+    "note": "null表示在给定高度、0.8–1m距离、板面角≤60度的可行域中未找到满足采样量的距离；不代表无可检出图像。"
+  },
+  {
+    "camera": "640",
+    "fixed_height_m": 0.7,
+    "target_cell_px": 3.0,
+    "feasible_min_distance_m": 0.8082903768654761,
+    "cell_px_at_feasible_min_distance": 3.3951555478697983,
+    "cell_px_at_1m": 2.1500575015811556,
+    "distance_boundary_within_work_domain_m": 0.8527074746083136,
+    "note": "null表示在给定高度、0.8–1m距离、板面角≤60度的可行域中未找到满足采样量的距离；不代表无可检出图像。"
+  },
+  {
+    "camera": "640",
+    "fixed_height_m": 0.725,
+    "target_cell_px": 3.0,
+    "feasible_min_distance_m": 0.8371578903249574,
+    "cell_px_at_feasible_min_distance": 3.3012069043592525,
+    "cell_px_at_1m": 2.24527340330745,
+    "distance_boundary_within_work_domain_m": 0.8723720989784411,
+    "note": "null表示在给定高度、0.8–1m距离、板面角≤60度的可行域中未找到满足采样量的距离；不代表无可检出图像。"
+  },
+  {
+    "camera": "640",
+    "fixed_height_m": 0.75,
+    "target_cell_px": 3.0,
+    "feasible_min_distance_m": 0.8660254037844387,
+    "cell_px_at_feasible_min_distance": 3.212245305533151,
+    "cell_px_at_1m": 2.3434647691036576,
+    "distance_boundary_within_work_domain_m": 0.8917998134079402,
+    "note": "null表示在给定高度、0.8–1m距离、板面角≤60度的可行域中未找到满足采样量的距离；不代表无可检出图像。"
+  },
+  {
+    "camera": "640",
+    "fixed_height_m": 0.8,
+    "target_cell_px": 3.0,
+    "feasible_min_distance_m": 0.9237604307034013,
+    "cell_px_at_feasible_min_distance": 3.047799693222578,
+    "cell_px_at_1m": 2.5506289535150257,
+    "distance_boundary_within_work_domain_m": 0.9299958446961651,
+    "note": "null表示在给定高度、0.8–1m距离、板面角≤60度的可行域中未找到满足采样量的距离；不代表无可检出图像。"
+  }
+]

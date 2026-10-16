@@ -1,0 +1,28 @@
+{
+  "acceptance_revision": 4,
+  "recommended_for_print": false,
+  "remote_updated": false,
+  "single_main": {
+    "total": 8,
+    "projection_passed": 0,
+    "worst_max_projection_px": 1.536272862054457,
+    "worst_mean_projection_px": 0.7610325832706336,
+    "median_reprojection_passed": 8
+  },
+  "joint": {
+    "total": 3,
+    "pose_passed": 3,
+    "max_translation_error_mm": 0.6320331783493195,
+    "max_rotation_error_deg": 0.051480161412541935
+  },
+  "pytest": {
+    "passed": 21,
+    "failed": 8,
+    "log": "pytest-run-2.txt"
+  },
+  "repair_count": {
+    "new_joint_group_geometry": 1,
+    "detector": 0,
+    "renderer": 0
+  }
+}

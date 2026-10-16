@@ -1,0 +1,4 @@
+{
+  "geometry_and_all_non_status_fields_unchanged": true,
+  "only_modified_spec_key": "status"
+}

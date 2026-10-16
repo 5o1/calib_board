@@ -1,0 +1,43 @@
+{
+  "acceptance_revision": 5,
+  "recommended_for_print": true,
+  "required_distinct_board_placements": 3,
+  "joint": {
+    "passed": 3,
+    "total": 3,
+    "max_translation_error_mm": 0.6320331783493195,
+    "max_rotation_error_deg": 0.051480161412541935,
+    "max_reprojection_median_px": 0.09530142517788937
+  },
+  "single_reprojection": {
+    "passed": 8,
+    "total": 8,
+    "worst_median_px": 0.09482459723949432
+  },
+  "single_workspace_projection": {
+    "reference_only": true,
+    "old_threshold_passed": 0,
+    "total": 8,
+    "worst_max_px": 1.536272862054457,
+    "worst_mean_px": 0.7610325832706336
+  },
+  "pytest": {
+    "passed": 31,
+    "failed": 0,
+    "log": "pytest-run-1.txt"
+  },
+  "unchanged": {
+    "detector": true,
+    "renderer": true,
+    "pdf": true,
+    "spec_geometry": true,
+    "raw_results_equal_review4": true
+  },
+  "repair_count": 0,
+  "remote_published": true,
+  "remote_directory": "~/calibration_board/",
+  "copy_verification": {
+    "published_files_matched": 12,
+    "archived_v1_files_matched": 6
+  }
+}

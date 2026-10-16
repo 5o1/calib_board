@@ -1,0 +1,46 @@
+{
+  "experiment": "Intrinsic capture coverage at fixed model, view count, poses, blur, noise seeds and 5 px ray-error threshold",
+  "limited_coverage": {
+    "xy_shift_step_m": [
+      0.13,
+      0.045
+    ],
+    "max_ray_projection_error_px": 7.721878252463412,
+    "corner_bounds_normalized_xy": [
+      [
+        0.2211975336074829,
+        0.2168190214369032
+      ],
+      [
+        0.8020179748535157,
+        0.7866045633951823
+      ]
+    ]
+  },
+  "limited_coverage_calibrated_redetection_control": {
+    "max_ray_projection_error_px": 8.905555299726318,
+    "retained_in_solver": false
+  },
+  "expanded_coverage": {
+    "xy_shift_step_m": [
+      0.21,
+      0.1
+    ],
+    "max_ray_projection_error_px": 3.1909947265325402,
+    "rms_px": 0.11154734719227818,
+    "corner_bounds_normalized_xy": [
+      [
+        0.13552876710891723,
+        0.12203302383422851
+      ],
+      [
+        0.8923098564147949,
+        0.8944792005750868
+      ]
+    ],
+    "used_images": 18,
+    "input_images": 18
+  },
+  "interpretation": "Expanded coverage passed the unchanged check with the original single-pass solver. This supports coverage/extrapolation as a contributor; it does not isolate all corner-localization biases.",
+  "physical_validation_executed": false
+}

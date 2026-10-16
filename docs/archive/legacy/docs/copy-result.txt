@@ -1,0 +1,9 @@
+TARGET_ABSENT
+MATCH README.md 11575 3a80afb45fd89b6eea16ae97f525b691110cfc3fe28eb2e6aaea7ed7930b62e7
+MATCH spec/board_v1.json 58440 0d37cb7b5f719e019bac39d16b68aae5604a62ef24aff154bcadda3818215c0b
+MATCH out/board_v1_A3.pdf 9894 be6a0475fc16867dc6ca7f97441816342d9e50e61b55c9d009edf273daa897a5
+MATCH calib_board/__init__.py 66 9be35c3da80d2b838c254ef16a1b20fd440d46e4b069ad54b5542871d92e3a2d
+MATCH calib_board/common.py 2257 8c673abefa078d9c5f2e49601314a98ab3d5d0d9f9919552b46485bf7f90f420
+MATCH calib_board/detect.py 4284 eab21fec45a85ad63f1917b48258782922519e7a49ec6a6d6f11b1fbbf5ac1ec
+REMOTE_DIRECTORY=~/calibration_board/
+Only shell mkdir and tar used for transfer; no calibration programs or dependency installation executed remotely.

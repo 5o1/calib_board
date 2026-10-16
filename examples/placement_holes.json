@@ -1,0 +1,21 @@
+{
+  "hole_measurements": [
+    {
+      "id": "H1",
+      "from_back_edge_mm": 100,
+      "from_left_edge_mm": 200
+    },
+    {
+      "id": "H2",
+      "from_back_edge_mm": 500,
+      "from_left_edge_mm": 200
+    }
+  ],
+  "board_surface_above_table_mm": 5,
+  "world_back_left_m": [
+    0,
+    0,
+    0
+  ],
+  "distance_tolerance_mm": 2
+}

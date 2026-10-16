@@ -1,0 +1,46 @@
+{
+  "dataset": "build/demo",
+  "spec_version": "1.1.1",
+  "intrinsics": {
+    "used_images": 18,
+    "input_images": 18,
+    "rms_px": 0.11233065784561304,
+    "max_focal_relative_error": 0.0019913366828314683,
+    "principal_point_error_px": [
+      0.4827560605144754,
+      -0.09708057712634854
+    ],
+    "K": [
+      [
+        908.3662681745244,
+        0.0,
+        648.3787560605144
+      ],
+      [
+        0.0,
+        907.3915176309501,
+        362.13591942287366
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "D": [
+      0.003260041427893448,
+      -0.018638638088835098,
+      -0.00024176860635370393,
+      1.3022510259695592e-05,
+      0.038837598899728154
+    ]
+  },
+  "extrinsics_using_estimated_intrinsics": {
+    "images": 3,
+    "distinct_placements": 3,
+    "translation_error_mm": 1.5832728005936505,
+    "rotation_error_deg": 0.04265348515022791,
+    "reprojection_median_px": 0.09715143878289773
+  },
+  "physical_validation_executed": false
+}

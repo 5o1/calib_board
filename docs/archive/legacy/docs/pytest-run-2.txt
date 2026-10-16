@@ -1,0 +1,84 @@
+..F.......F....                                                          [100%]
+=================================== FAILURES ===================================
+___________________ test_closed_loop[0.6-30-0-0-False-1280] ____________________
+
+camera = '1280', distance = 0.6, tilt = 30, azimuth = 0, roll = 0
+occlusion = False
+
+    @pytest.mark.parametrize('camera',['1280','640'])
+    @pytest.mark.parametrize('distance,tilt,azimuth,roll,occlusion',[
+        (.60,30,0,0,False),(.70,30,0,3,False),(.90,45,0,-4,False),(1.,45,90,2,True),(.85,40,30,-5,True)])
+    def test_closed_loop(camera,distance,tilt,azimuth,roll,occlusion):
+        K,D,info=intrinsics(f'examples/camera_{camera}.json');wh=[info['width'],info['height']]
+        T=pose(SPEC,distance,tilt,azimuth,roll)
+        name=f'{camera}_{distance}_{tilt}_{azimuth}_{int(occlusion)}'
+        image=render(SPEC,T,K,wh,occlude=occlusion,noise_seed=17)
+        Path('out/synthetic').mkdir(exist_ok=True)
+        cv2.imwrite(f'out/synthetic/{name}.png',image)
+        detection,overlay=detect(image,SPEC,K,D)
+        save_json(f'out/synthetic/{name}_detection.json',detection)
+        cv2.imwrite(f'out/synthetic/{name}_overlay.png',overlay)
+        recovered=np.array(detection['T_camera_optical_board'])
+        # 非恒等世界变换，避免把逆变换错误掩盖掉。
+        wb=placement_transform(read_data('examples/placement_holes.json'),SPEC)
+        ext=extrinsics([detection],{'T_world_board':wb.tolist()},SPEC)
+        truth=wb@np.linalg.inv(T);estimate=np.array(ext['T_world_camera_optical'])
+        dt=np.linalg.norm(estimate[:3,3]-truth[:3,3])*1000;dr=rotation_error(estimate[:3,:3],truth[:3,:3])
+        dbt=np.linalg.norm(recovered[:3,3]-T[:3,3])*1000;dbr=rotation_error(recovered[:3,:3],T[:3,:3])
+        gray=analyze(image,detection,SPEC)
+        metrics={'camera':camera,'distance_m':distance,'tilt_normal_deg':tilt,'height_above_board_m':distance*np.cos(np.deg2rad(tilt)),
+                 'occlusion':occlusion,'corners':len(detection['corner_ids']),'board_translation_error_mm':dbt,'board_rotation_error_deg':dbr,
+                 'camera_translation_error_mm':float(dt),'camera_rotation_error_deg':dr,'reprojection_median_px':detection['reprojection_median_px'],
+                 'reprojection_p95_px':detection['reprojection_p95_px'],'gray_monotonic':gray['monotonic_increasing'],'gray_visible':sum(p['valid'] for p in gray['patches'])}
+        save_json(f'out/synthetic/{name}_metrics.json',metrics);save_json(f'out/synthetic/{name}_gray.json',gray)
+        assert gray['monotonic_increasing']
+        if camera=='1280':
+>           assert dbt<=2 and dt<=2
+E           assert (np.float64(1.1996204943291158) <= 2 and np.float64(2.5014969355456618) <= 2)
+
+tests/test_board.py:109: AssertionError
+----------------------------- Captured stderr call -----------------------------
+[ WARN:0@1.341] global aruco_board.cpp:547 CharucoBoard Marker border 0.00225 is less than 70% of ArUco pin size 0.00658333. Please increase markerSeparation or decrease markerLength for stable board detection
+__________________ test_closed_loop[0.85-40-30--5-True-1280] ___________________
+
+camera = '1280', distance = 0.85, tilt = 40, azimuth = 30, roll = -5
+occlusion = True
+
+    @pytest.mark.parametrize('camera',['1280','640'])
+    @pytest.mark.parametrize('distance,tilt,azimuth,roll,occlusion',[
+        (.60,30,0,0,False),(.70,30,0,3,False),(.90,45,0,-4,False),(1.,45,90,2,True),(.85,40,30,-5,True)])
+    def test_closed_loop(camera,distance,tilt,azimuth,roll,occlusion):
+        K,D,info=intrinsics(f'examples/camera_{camera}.json');wh=[info['width'],info['height']]
+        T=pose(SPEC,distance,tilt,azimuth,roll)
+        name=f'{camera}_{distance}_{tilt}_{azimuth}_{int(occlusion)}'
+        image=render(SPEC,T,K,wh,occlude=occlusion,noise_seed=17)
+        Path('out/synthetic').mkdir(exist_ok=True)
+        cv2.imwrite(f'out/synthetic/{name}.png',image)
+        detection,overlay=detect(image,SPEC,K,D)
+        save_json(f'out/synthetic/{name}_detection.json',detection)
+        cv2.imwrite(f'out/synthetic/{name}_overlay.png',overlay)
+        recovered=np.array(detection['T_camera_optical_board'])
+        # 非恒等世界变换，避免把逆变换错误掩盖掉。
+        wb=placement_transform(read_data('examples/placement_holes.json'),SPEC)
+        ext=extrinsics([detection],{'T_world_board':wb.tolist()},SPEC)
+        truth=wb@np.linalg.inv(T);estimate=np.array(ext['T_world_camera_optical'])
+        dt=np.linalg.norm(estimate[:3,3]-truth[:3,3])*1000;dr=rotation_error(estimate[:3,:3],truth[:3,:3])
+        dbt=np.linalg.norm(recovered[:3,3]-T[:3,3])*1000;dbr=rotation_error(recovered[:3,:3],T[:3,:3])
+        gray=analyze(image,detection,SPEC)
+        metrics={'camera':camera,'distance_m':distance,'tilt_normal_deg':tilt,'height_above_board_m':distance*np.cos(np.deg2rad(tilt)),
+                 'occlusion':occlusion,'corners':len(detection['corner_ids']),'board_translation_error_mm':dbt,'board_rotation_error_deg':dbr,
+                 'camera_translation_error_mm':float(dt),'camera_rotation_error_deg':dr,'reprojection_median_px':detection['reprojection_median_px'],
+                 'reprojection_p95_px':detection['reprojection_p95_px'],'gray_monotonic':gray['monotonic_increasing'],'gray_visible':sum(p['valid'] for p in gray['patches'])}
+        save_json(f'out/synthetic/{name}_metrics.json',metrics);save_json(f'out/synthetic/{name}_gray.json',gray)
+        assert gray['monotonic_increasing']
+        if camera=='1280':
+>           assert dbt<=2 and dt<=2
+E           assert (np.float64(0.6285554979623066) <= 2 and np.float64(2.552351017422374) <= 2)
+
+tests/test_board.py:109: AssertionError
+----------------------------- Captured stderr call -----------------------------
+[ WARN:0@4.801] global aruco_board.cpp:547 CharucoBoard Marker border 0.00225 is less than 70% of ArUco pin size 0.00658333. Please increase markerSeparation or decrease markerLength for stable board detection
+=========================== short test summary info ============================
+FAILED tests/test_board.py::test_closed_loop[0.6-30-0-0-False-1280] - assert ...
+FAILED tests/test_board.py::test_closed_loop[0.85-40-30--5-True-1280] - asser...
+2 failed, 13 passed in 5.96s

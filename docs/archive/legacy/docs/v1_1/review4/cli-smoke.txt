@@ -1,0 +1,3 @@
+CLI output equals joint test B result: True
+images: 3 total corners: 60 reprojection median px: 0.08988860459558551
+detect.py, synthetic.py, PDF, specification unchanged before status update: True

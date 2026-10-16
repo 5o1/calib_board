@@ -1,0 +1,21 @@
+{
+  "board_id": "STATION-CALIB-001",
+  "spec_version": "1.1.1",
+  "date": null,
+  "operator": null,
+  "printer": null,
+  "paper": null,
+  "ruler": null,
+  "x_ruler_mm": null,
+  "y_ruler_mm": null,
+  "square_samples_mm": [],
+  "H1_H2_mm": null,
+  "H1_H4_mm": null,
+  "H1_H3_mm": null,
+  "H2_H4_mm": null,
+  "expected_diagonal_mm": 486.5480449040978,
+  "board_surface_above_table_mm": null,
+  "max_relative_error_allowed": 0.005,
+  "accepted": null,
+  "note": "Null means not measured. Save the completed record to docs/measurements/<date>_<board-id>.json."
+}

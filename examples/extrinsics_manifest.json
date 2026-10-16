@@ -1,0 +1,8 @@
+{
+  "intrinsics": "../intrinsics.json",
+  "observations": [
+    {"image": "center.png", "placement": "center_placement.json"},
+    {"image": "left.png", "placement": "left_placement.json"},
+    {"image": "right.png", "placement": "right_placement.json"}
+  ]
+}

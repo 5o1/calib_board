@@ -1,0 +1,362 @@
+[
+  {
+    "group": "A",
+    "camera_height_above_board_m": 0.725,
+    "central_distance_m": 0.9,
+    "views": [
+      {
+        "label": "center",
+        "board_center_world_m": [
+          0,
+          0.0,
+          0.005
+        ],
+        "distance_to_board_center_m": 0.9000000000000001,
+        "plane_view_angle_deg": 53.663942485386045,
+        "normal_angle_deg": 36.336057514613955,
+        "corners": 20
+      },
+      {
+        "label": "left",
+        "board_center_world_m": [
+          0,
+          -0.15,
+          0.005
+        ],
+        "distance_to_board_center_m": 0.912414379544733,
+        "plane_view_angle_deg": 52.61702903811126,
+        "normal_angle_deg": 37.38297096188874,
+        "corners": 20
+      },
+      {
+        "label": "right",
+        "board_center_world_m": [
+          0,
+          0.15,
+          0.005
+        ],
+        "distance_to_board_center_m": 0.912414379544733,
+        "plane_view_angle_deg": 52.61702903811126,
+        "normal_angle_deg": 37.38297096188874,
+        "corners": 20
+      }
+    ],
+    "camera_translation_error_mm": 0.21345400757497435,
+    "camera_rotation_error_deg": 0.031497807471676596,
+    "workspace_projection": {
+      "points": 6273,
+      "grid_size_xyz": [
+        51,
+        41,
+        3
+      ],
+      "spacing_mm": 10,
+      "workspace_center_world_m": [
+        0,
+        0,
+        0
+      ],
+      "workspace_size_xy_mm": [
+        500,
+        400
+      ],
+      "heights_above_table_mm": [
+        0,
+        50,
+        100
+      ],
+      "true_in_frame_points": 6273,
+      "max_px": 0.7311959601236766,
+      "mean_px": 0.6366278993881451,
+      "per_layer": [
+        {
+          "height_above_table_m": 0,
+          "points": 2091,
+          "max_px": 0.7146441967971491,
+          "mean_px": 0.6271999982959333
+        },
+        {
+          "height_above_table_m": 0.05,
+          "points": 2091,
+          "max_px": 0.7222176217857489,
+          "mean_px": 0.6360366224259802
+        },
+        {
+          "height_above_table_m": 0.1,
+          "points": 2091,
+          "max_px": 0.7311959601236766,
+          "mean_px": 0.6466470774425221
+        }
+      ],
+      "scope": "全部6273点均参与统计，包括投影到画幅之外的点；无裁剪、异常点剔除或配准补偿。"
+    },
+    "reprojection_median_px": 0.09530142517788937,
+    "total_corners": 60,
+    "true_T_world_camera_optical": [
+      [
+        0.8055555555555554,
+        1.1906288325043715e-17,
+        -0.592520250213932,
+        0.5332682251925388
+      ],
+      [
+        -1.1906288325043717e-17,
+        -1.0,
+        -3.628140139272402e-17,
+        2.7755575615628914e-17
+      ],
+      [
+        -0.592520250213932,
+        3.628140139272402e-17,
+        -0.8055555555555554,
+        0.7299999999999999
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  {
+    "group": "B",
+    "camera_height_above_board_m": 0.7,
+    "central_distance_m": 0.9,
+    "views": [
+      {
+        "label": "center",
+        "board_center_world_m": [
+          0,
+          0.0,
+          0.005
+        ],
+        "distance_to_board_center_m": 0.9,
+        "plane_view_angle_deg": 51.05755873101861,
+        "normal_angle_deg": 38.94244126898139,
+        "corners": 20
+      },
+      {
+        "label": "left",
+        "board_center_world_m": [
+          0,
+          -0.15,
+          0.005
+        ],
+        "distance_to_board_center_m": 0.9896814561094852,
+        "plane_view_angle_deg": 45.01551964095153,
+        "normal_angle_deg": 44.98448035904847,
+        "corners": 20
+      },
+      {
+        "label": "right",
+        "board_center_world_m": [
+          0,
+          0.15,
+          0.005
+        ],
+        "distance_to_board_center_m": 0.8279677623150611,
+        "plane_view_angle_deg": 57.7194892224306,
+        "normal_angle_deg": 32.2805107775694,
+        "corners": 20
+      }
+    ],
+    "camera_translation_error_mm": 0.6320331783493195,
+    "camera_rotation_error_deg": 0.051480161412541935,
+    "workspace_projection": {
+      "points": 6273,
+      "grid_size_xyz": [
+        51,
+        41,
+        3
+      ],
+      "spacing_mm": 10,
+      "workspace_center_world_m": [
+        0,
+        0,
+        0
+      ],
+      "workspace_size_xy_mm": [
+        500,
+        400
+      ],
+      "heights_above_table_mm": [
+        0,
+        50,
+        100
+      ],
+      "true_in_frame_points": 6273,
+      "max_px": 0.8386185283449145,
+      "mean_px": 0.6948315726952005,
+      "per_layer": [
+        {
+          "height_above_table_m": 0,
+          "points": 2091,
+          "max_px": 0.8048599919779054,
+          "mean_px": 0.6891553793039599
+        },
+        {
+          "height_above_table_m": 0.05,
+          "points": 2091,
+          "max_px": 0.8190641327159998,
+          "mean_px": 0.6940457676339499
+        },
+        {
+          "height_above_table_m": 0.1,
+          "points": 2091,
+          "max_px": 0.8386185283449145,
+          "mean_px": 0.7012935711476918
+        }
+      ],
+      "scope": "全部6273点均参与统计，包括投影到画幅之外的点；无裁剪、异常点剔除或配准补偿。"
+    },
+    "reprojection_median_px": 0.08988860459558551,
+    "total_corners": 60,
+    "true_T_world_camera_optical": [
+      [
+        0.9481861458946244,
+        0.04666476866687487,
+        -0.3142696805273545,
+        0.2828427124746191
+      ],
+      [
+        -0.1397064686543306,
+        -0.827155249224618,
+        -0.5443310539518175,
+        0.4898979485566358
+      ],
+      [
+        -0.2853508986312028,
+        0.5600326714089339,
+        -0.7777777777777776,
+        0.7049999999999998
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  {
+    "group": "C",
+    "camera_height_above_board_m": 0.75,
+    "central_distance_m": 0.9,
+    "views": [
+      {
+        "label": "center",
+        "board_center_world_m": [
+          0,
+          0.0,
+          0.005
+        ],
+        "distance_to_board_center_m": 0.9000000000000001,
+        "plane_view_angle_deg": 56.44269023807928,
+        "normal_angle_deg": 33.55730976192072,
+        "corners": 20
+      },
+      {
+        "label": "left",
+        "board_center_world_m": [
+          0,
+          -0.15,
+          0.005
+        ],
+        "distance_to_board_center_m": 0.912414379544733,
+        "plane_view_angle_deg": 55.28499604605178,
+        "normal_angle_deg": 34.71500395394822,
+        "corners": 20
+      },
+      {
+        "label": "right",
+        "board_center_world_m": [
+          0,
+          0.15,
+          0.005
+        ],
+        "distance_to_board_center_m": 0.912414379544733,
+        "plane_view_angle_deg": 55.28499604605178,
+        "normal_angle_deg": 34.71500395394822,
+        "corners": 20
+      }
+    ],
+    "camera_translation_error_mm": 0.20425943226414522,
+    "camera_rotation_error_deg": 0.03409218265697292,
+    "workspace_projection": {
+      "points": 6273,
+      "grid_size_xyz": [
+        51,
+        41,
+        3
+      ],
+      "spacing_mm": 10,
+      "workspace_center_world_m": [
+        0,
+        0,
+        0
+      ],
+      "workspace_size_xy_mm": [
+        500,
+        400
+      ],
+      "heights_above_table_mm": [
+        0,
+        50,
+        100
+      ],
+      "true_in_frame_points": 6273,
+      "max_px": 0.7472743984735185,
+      "mean_px": 0.6861514895720834,
+      "per_layer": [
+        {
+          "height_above_table_m": 0,
+          "points": 2091,
+          "max_px": 0.7299019867902639,
+          "mean_px": 0.6753352794710256
+        },
+        {
+          "height_above_table_m": 0.05,
+          "points": 2091,
+          "max_px": 0.735015399624652,
+          "mean_px": 0.6854463880079922
+        },
+        {
+          "height_above_table_m": 0.1,
+          "points": 2091,
+          "max_px": 0.7472743984735185,
+          "mean_px": 0.6976728012372323
+        }
+      ],
+      "scope": "全部6273点均参与统计，包括投影到画幅之外的点；无裁剪、异常点剔除或配准补偿。"
+    },
+    "reprojection_median_px": 0.09047378654632948,
+    "total_corners": 60,
+    "true_T_world_camera_optical": [
+      [
+        0.8321912789621452,
+        0.04361329686911984,
+        -0.5527707983925663,
+        0.4974937185533097
+      ],
+      [
+        0.05233595624294377,
+        -0.9986295347545739,
+        -1.732346097742557e-17,
+        2.7755575615628914e-17
+      ],
+      [
+        -0.5520132452246828,
+        -0.028929788317050426,
+        -0.8333333333333337,
+        0.7550000000000004
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ]
+  }
+]

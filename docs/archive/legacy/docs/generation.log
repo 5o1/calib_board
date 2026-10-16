@@ -1,0 +1,1 @@
+[ WARN:0@0.297] global aruco_board.cpp:547 CharucoBoard Marker border 0.00225 is less than 70% of ArUco pin size 0.00658333. Please increase markerSeparation or decrease markerLength for stable board detection

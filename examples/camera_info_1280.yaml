@@ -1,0 +1,12 @@
+image_width: 1280
+image_height: 720
+camera_name: station_middle
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [906.561, 0, 647.896, 0, 905.986, 362.233, 0, 0, 1]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [0, 0, 0, 0, 0]

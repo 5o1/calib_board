@@ -1,0 +1,141 @@
+{
+  "remote_directory": "~/calibration_board/",
+  "published_matches": 12,
+  "archived_matches": 6,
+  "files": [
+    {
+      "path": "README.md",
+      "kind": "published",
+      "bytes": 14832,
+      "sha256": "9ee6c5a7f039350dcd8d0283616725f678bd855561602c0b3935377408fea90e",
+      "match": true
+    },
+    {
+      "path": "LICENSE",
+      "kind": "published",
+      "bytes": 1089,
+      "sha256": "d8119f32d4dafae70533c7eb9ead7ce6b68f2f76bd293834de1c47e6a3e69670",
+      "match": true
+    },
+    {
+      "path": "spec/board_v1_1.json",
+      "kind": "published",
+      "bytes": 55388,
+      "sha256": "e00809bd5a20dcebc5bb2f1810bd1f77ae4e04eddcdf4499d2c23f575d1e323a",
+      "match": true
+    },
+    {
+      "path": "spec/print_measurements_v1_1.template.json",
+      "kind": "published",
+      "bytes": 551,
+      "sha256": "472bbbad64520a88c65efd2c1ac08ea59ac047bb3fb7f8c16e549c613c98a7c0",
+      "match": true
+    },
+    {
+      "path": "out/board_v1_1_A3.pdf",
+      "kind": "published",
+      "bytes": 8754,
+      "sha256": "cb171c1c3f1635f23522e0f70adc62b66b661e194f1e975e53aba0b56de2a22b",
+      "match": true
+    },
+    {
+      "path": "calib_board/__init__.py",
+      "kind": "published",
+      "bytes": 66,
+      "sha256": "9be35c3da80d2b838c254ef16a1b20fd440d46e4b069ad54b5542871d92e3a2d",
+      "match": true
+    },
+    {
+      "path": "calib_board/common.py",
+      "kind": "published",
+      "bytes": 2259,
+      "sha256": "e27a84128db2909e9e0984dc3fa7a75dd6832a4cd1318f3d17c1619cdf039c6c",
+      "match": true
+    },
+    {
+      "path": "calib_board/detect.py",
+      "kind": "published",
+      "bytes": 3503,
+      "sha256": "151504eca2c5289781e273ace668ba66bc157797b959fdc6f478b7b73017a45e",
+      "match": true
+    },
+    {
+      "path": "calib_board/extrinsics.py",
+      "kind": "published",
+      "bytes": 7567,
+      "sha256": "c056dd6b0e3f48e751010f389e33987d985eeeb7bf3f3a6ec38c7a7d8cbfa78e",
+      "match": true
+    },
+    {
+      "path": "examples/camera_1280.json",
+      "kind": "published",
+      "bytes": 239,
+      "sha256": "55d385a4ad28eb7c29cb8ec75c197f87f73c5cc69dce076e9e4a530d45f039b5",
+      "match": true
+    },
+    {
+      "path": "examples/camera_640.json",
+      "kind": "published",
+      "bytes": 238,
+      "sha256": "4c87175c5a49db1bd31097ed9fbeeb4fdf900db96f735d6ce7231dbbdf0af850",
+      "match": true
+    },
+    {
+      "path": "superseded/README.md",
+      "kind": "published",
+      "bytes": 660,
+      "sha256": "da2369549274e482c1439fd33ab32560ab88d6105d2cc805986b69e77a291810",
+      "match": true
+    },
+    {
+      "path": "superseded/README_v1_original.md",
+      "kind": "archived_v1",
+      "bytes": 11575,
+      "sha256": "3a80afb45fd89b6eea16ae97f525b691110cfc3fe28eb2e6aaea7ed7930b62e7",
+      "match": true
+    },
+    {
+      "path": "superseded/spec/board_v1.json",
+      "kind": "archived_v1",
+      "bytes": 58440,
+      "sha256": "0d37cb7b5f719e019bac39d16b68aae5604a62ef24aff154bcadda3818215c0b",
+      "match": true
+    },
+    {
+      "path": "superseded/out/board_v1_A3.pdf",
+      "kind": "archived_v1",
+      "bytes": 9894,
+      "sha256": "be6a0475fc16867dc6ca7f97441816342d9e50e61b55c9d009edf273daa897a5",
+      "match": true
+    },
+    {
+      "path": "superseded/calib_board/__init__.py",
+      "kind": "archived_v1",
+      "bytes": 66,
+      "sha256": "9be35c3da80d2b838c254ef16a1b20fd440d46e4b069ad54b5542871d92e3a2d",
+      "match": true
+    },
+    {
+      "path": "superseded/calib_board/common.py",
+      "kind": "archived_v1",
+      "bytes": 2257,
+      "sha256": "8c673abefa078d9c5f2e49601314a98ab3d5d0d9f9919552b46485bf7f90f420",
+      "match": true
+    },
+    {
+      "path": "superseded/calib_board/detect.py",
+      "kind": "archived_v1",
+      "bytes": 4284,
+      "sha256": "eab21fec45a85ad63f1917b48258782922519e7a49ec6a6d6f11b1fbbf5ac1ec",
+      "match": true
+    }
+  ],
+  "remote_programs_run": [
+    "shell",
+    "mkdir",
+    "mv",
+    "tar"
+  ],
+  "calibration_programs_run": false,
+  "dependencies_installed": false
+}

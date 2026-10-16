@@ -1,0 +1,42 @@
+Current English workflow validation
+===================================
+Environment: Python 3.14.7, OpenCV 4.13.0, existing requirements.lock.txt
+Board: STATION-CALIB-001, specification 1.1.1
+Physical print/camera validation: NOT EXECUTED
+
+Commands executed from the repository root using .venv/bin/python:
+
+python -m pip check
+No broken requirements found.
+
+python -m calib_board.generate
+Generated the English vector PDF and 300 DPI preview.
+Compared paper, ChArUco, holes, hole rectangle, rulers, frames and gray-patch
+geometry against the archived 1.1.0 specification: unchanged.
+Inspected the rendered page for English labels and clipping.
+
+python -m pytest -q --junitxml=docs/pytest-results.xml
+46 passed in 24.50s
+
+python -m examples.make_synthetic_dataset --output build/demo
+Saved 18 intrinsic views, three measured extrinsic views, and truth.
+
+python -m calib_board.intrinsics build/demo/intrinsics --output build/demo/estimated_intrinsics.json
+Used 18/18 images; RMS 0.1123 px; skipped 0.
+
+python -m calib_board.calibrate_extrinsics build/demo/manifest.json --intrinsics build/demo/estimated_intrinsics.json --output build/demo/estimated_extrinsics.json --diagnostics-dir build/demo/extrinsics_views
+Used 3 images, 3 placements; median 0.0972 px.
+
+Compared output with generated truth:
+Maximum relative focal-length error: 0.199134 percent
+Principal-point errors: +0.482756 px, -0.097081 px
+Camera translation error: 1.583273 mm
+Camera rotation error: 0.042653 degrees
+Machine-readable values: docs/current-demo-results.json
+
+The nonzero-distortion fixture uses separately remapped PDF images and the
+original single-pass intrinsic solve. Its maximum projected-ray error was
+3.190995 px against an unchanged 5 px threshold. A preceding narrower-coverage
+fixture failed at 7.721878 px; calibrated redetection did not improve that control
+and was removed. See docs/intrinsic-coverage-experiment.json for the comparison.
+These are synthetic observations, not a measured physical accuracy claim.

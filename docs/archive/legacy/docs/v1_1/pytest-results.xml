@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="24" time="21.074" timestamp="2026-10-16T23:33:42.910424+09:00" hostname="Revenger"><testcase classname="tests.test_board" name="test_pdf[spec/board_v1.json]" time="0.742" /><testcase classname="tests.test_board" name="test_pdf[spec/board_v1_1.json]" time="0.617" /><testcase classname="tests.test_board" name="test_hole_clearance[spec/board_v1.json]" time="0.140" /><testcase classname="tests.test_board" name="test_hole_clearance[spec/board_v1_1.json]" time="0.120" /><testcase classname="tests.test_board" name="test_closed_loop[center-0.725-0.9-0-0-shift0-False-1280]" time="3.736" /><testcase classname="tests.test_board" name="test_closed_loop[center-0.725-0.9-0-0-shift0-False-640]" time="1.135" /><testcase classname="tests.test_board" name="test_closed_loop[left-0.725-0.9-0-0-shift1-False-1280]" time="1.222" /><testcase classname="tests.test_board" name="test_closed_loop[left-0.725-0.9-0-0-shift1-False-640]" time="1.190" /><testcase classname="tests.test_board" name="test_closed_loop[right-0.725-0.9-0-0-shift2-True-1280]" time="1.269" /><testcase classname="tests.test_board" name="test_closed_loop[right-0.725-0.9-0-0-shift2-True-640]" time="0.599" /><testcase classname="tests.test_board" name="test_closed_loop[back-0.725-0.9-0-0-shift3-False-1280]" time="1.075"><failure message="assert (0.8401608763453654 &lt;= 2 and 3.8500218587127737 &lt;= 2)">camera = '1280', name = '1280_back', height = 0.725, distance = 0.9, azimuth = 0
+roll = 0, shift = (0, -0.04), occlusion = False
+
+    @pytest.mark.parametrize('camera',['1280','640'])
+    @pytest.mark.parametrize('name,height,distance,azimuth,roll,shift,occlusion',WORKCELL_CASES)
+    def test_closed_loop(camera,name,height,distance,azimuth,roll,shift,occlusion):
+        K,D,info=intrinsics(f'examples/camera_{camera}.json');wh=[info['width'],info['height']]
+        T,geometry=workcell_pose(SPEC,height,distance,azimuth,roll,shift)
+        assert .65-1e-9 &lt;= geometry['height_m'] &lt;= .8+1e-9
+        assert .8-1e-9 &lt;= geometry['distance_m'] &lt;= 1.+1e-9
+        assert 30 &lt;= geometry['normal_angle_deg'] &lt;= 60
+        assert 30 &lt;= geometry['plane_view_angle_deg'] &lt;= 60
+        name=f'{camera}_{name}';directory=Path('out/synthetic_v1_1');directory.mkdir(exist_ok=True)
+        base=directory/name
+        image=render(SPEC,T,K,wh,occlude=occlusion,noise_seed=17)
+        cv2.imwrite(str(base)+'.png',image)
+        metrics={'camera':camera,'case':name,'geometry':geometry,'occlusion':occlusion,
+                 'min_cell_px':minimum_cell_px(SPEC,T,K),'detected':False,'meets_pose_gate':False}
+        try:
+            detection,overlay=detect(image,SPEC,K,D)
+        except ValueError as exc:
+            metrics['error']=str(exc);save_json(str(base)+'_metrics.json',metrics)
+            if camera=='1280':raise
+            return
+        save_json(str(base)+'_detection.json',detection)
+        cv2.imwrite(str(base)+'_overlay.png',overlay)
+        recovered=np.array(detection['T_camera_optical_board'])
+        wb=placement_transform(read_data('examples/placement_holes.json'),SPEC)
+        ext=extrinsics([detection],{'T_world_board':wb.tolist()},SPEC)
+        truth=wb@np.linalg.inv(T);estimate=np.array(ext['T_world_camera_optical'])
+        dt=float(np.linalg.norm(estimate[:3,3]-truth[:3,3])*1000);dr=rotation_error(estimate[:3,:3],truth[:3,:3])
+        dbt=float(np.linalg.norm(recovered[:3,3]-T[:3,3])*1000);dbr=rotation_error(recovered[:3,:3],T[:3,:3])
+        gray=analyze(image,detection,SPEC)
+        metrics.update(detected=True,corners=len(detection['corner_ids']),board_translation_error_mm=dbt,
+                       board_rotation_error_deg=dbr,camera_translation_error_mm=dt,camera_rotation_error_deg=dr,
+                       reprojection_median_px=detection['reprojection_median_px'],reprojection_p95_px=detection['reprojection_p95_px'],
+                       gray_monotonic=gray['monotonic_increasing'],gray_visible=sum(p['valid'] for p in gray['patches']))
+        metrics['meets_pose_gate']=bool(dbt&lt;=2 and dt&lt;=2 and dbr&lt;=.2 and dr&lt;=.2 and detection['reprojection_median_px']&lt;=.5)
+        save_json(str(base)+'_metrics.json',metrics);save_json(str(base)+'_gray.json',gray)
+        if camera=='1280':
+            assert gray['monotonic_increasing']
+&gt;           assert dbt&lt;=2 and dt&lt;=2
+E           assert (0.8401608763453654 &lt;= 2 and 3.8500218587127737 &lt;= 2)
+
+tests/test_board.py:135: AssertionError</failure></testcase><testcase classname="tests.test_board" name="test_closed_loop[back-0.725-0.9-0-0-shift3-False-640]" time="1.297" /><testcase classname="tests.test_board" name="test_closed_loop[front-0.725-0.9-0-0-shift4-True-1280]" time="1.660"><failure message="assert (0.6665155196375739 &lt;= 2 and 2.300349959315589 &lt;= 2)">camera = '1280', name = '1280_front', height = 0.725, distance = 0.9
+azimuth = 0, roll = 0, shift = (0, 0.04), occlusion = True
+
+    @pytest.mark.parametrize('camera',['1280','640'])
+    @pytest.mark.parametrize('name,height,distance,azimuth,roll,shift,occlusion',WORKCELL_CASES)
+    def test_closed_loop(camera,name,height,distance,azimuth,roll,shift,occlusion):
+        K,D,info=intrinsics(f'examples/camera_{camera}.json');wh=[info['width'],info['height']]
+        T,geometry=workcell_pose(SPEC,height,distance,azimuth,roll,shift)
+        assert .65-1e-9 &lt;= geometry['height_m'] &lt;= .8+1e-9
+        assert .8-1e-9 &lt;= geometry['distance_m'] &lt;= 1.+1e-9
+        assert 30 &lt;= geometry['normal_angle_deg'] &lt;= 60
+        assert 30 &lt;= geometry['plane_view_angle_deg'] &lt;= 60
+        name=f'{camera}_{name}';directory=Path('out/synthetic_v1_1');directory.mkdir(exist_ok=True)
+        base=directory/name
+        image=render(SPEC,T,K,wh,occlude=occlusion,noise_seed=17)
+        cv2.imwrite(str(base)+'.png',image)
+        metrics={'camera':camera,'case':name,'geometry':geometry,'occlusion':occlusion,
+                 'min_cell_px':minimum_cell_px(SPEC,T,K),'detected':False,'meets_pose_gate':False}
+        try:
+            detection,overlay=detect(image,SPEC,K,D)
+        except ValueError as exc:
+            metrics['error']=str(exc);save_json(str(base)+'_metrics.json',metrics)
+            if camera=='1280':raise
+            return
+        save_json(str(base)+'_detection.json',detection)
+        cv2.imwrite(str(base)+'_overlay.png',overlay)
+        recovered=np.array(detection['T_camera_optical_board'])
+        wb=placement_transform(read_data('examples/placement_holes.json'),SPEC)
+        ext=extrinsics([detection],{'T_world_board':wb.tolist()},SPEC)
+        truth=wb@np.linalg.inv(T);estimate=np.array(ext['T_world_camera_optical'])
+        dt=float(np.linalg.norm(estimate[:3,3]-truth[:3,3])*1000);dr=rotation_error(estimate[:3,:3],truth[:3,:3])
+        dbt=float(np.linalg.norm(recovered[:3,3]-T[:3,3])*1000);dbr=rotation_error(recovered[:3,:3],T[:3,:3])
+        gray=analyze(image,detection,SPEC)
+        metrics.update(detected=True,corners=len(detection['corner_ids']),board_translation_error_mm=dbt,
+                       board_rotation_error_deg=dbr,camera_translation_error_mm=dt,camera_rotation_error_deg=dr,
+                       reprojection_median_px=detection['reprojection_median_px'],reprojection_p95_px=detection['reprojection_p95_px'],
+                       gray_monotonic=gray['monotonic_increasing'],gray_visible=sum(p['valid'] for p in gray['patches']))
+        metrics['meets_pose_gate']=bool(dbt&lt;=2 and dt&lt;=2 and dbr&lt;=.2 and dr&lt;=.2 and detection['reprojection_median_px']&lt;=.5)
+        save_json(str(base)+'_metrics.json',metrics);save_json(str(base)+'_gray.json',gray)
+        if camera=='1280':
+            assert gray['monotonic_increasing']
+&gt;           assert dbt&lt;=2 and dt&lt;=2
+E           assert (0.6665155196375739 &lt;= 2 and 2.300349959315589 &lt;= 2)
+
+tests/test_board.py:135: AssertionError</failure></testcase><testcase classname="tests.test_board" name="test_closed_loop[front-0.725-0.9-0-0-shift4-True-640]" time="0.762" /><testcase classname="tests.test_board" name="test_closed_loop[near_low-0.65-0.8-25--3-shift5-False-1280]" time="0.796" /><testcase classname="tests.test_board" name="test_closed_loop[near_low-0.65-0.8-25--3-shift5-False-640]" time="0.492" /><testcase classname="tests.test_board" name="test_closed_loop[far_high-0.8-1.0-90-3-shift6-True-1280]" time="0.946" /><testcase classname="tests.test_board" name="test_closed_loop[far_high-0.8-1.0-90-3-shift6-True-640]" time="0.594" /><testcase classname="tests.test_board" name="test_closed_loop[far_low-0.65-1.0-45--4-shift7-False-1280]" time="0.709" /><testcase classname="tests.test_board" name="test_closed_loop[far_low-0.65-1.0-45--4-shift7-False-640]" time="0.610" /><testcase classname="tests.test_board" name="test_white_margin" time="0.000" /><testcase classname="tests.test_board" name="test_cells" time="0.334" /><testcase classname="tests.test_board" name="test_hole_placement" time="0.003" /><testcase classname="tests.test_board" name="test_multi_image_and_quaternion" time="0.005" /></testsuite></testsuites>

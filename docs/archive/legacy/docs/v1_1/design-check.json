@@ -1,0 +1,111 @@
+[
+  {
+    "camera": "1280",
+    "normal_angle_deg": 30,
+    "plane_view_angle_deg": 60,
+    "min_px_at_0.9m": 4.670129309767049,
+    "min_px_at_1.0m": 4.281830756731116,
+    "target_cell_px": 3.5,
+    "distance_boundary_m": 1.267913818359375
+  },
+  {
+    "camera": "1280",
+    "normal_angle_deg": 36.3360575146,
+    "plane_view_angle_deg": 53.6639424854,
+    "min_px_at_0.9m": 4.199312476880582,
+    "min_px_at_1.0m": 3.8620378248297413,
+    "target_cell_px": 3.5,
+    "distance_boundary_m": 1.1284294128417969
+  },
+  {
+    "camera": "1280",
+    "normal_angle_deg": 40,
+    "plane_view_angle_deg": 50,
+    "min_px_at_0.9m": 3.921434067908244,
+    "min_px_at_1.0m": 3.612369817100174,
+    "target_cell_px": 3.5,
+    "distance_boundary_m": 1.0406341552734375
+  },
+  {
+    "camera": "1280",
+    "normal_angle_deg": 45,
+    "plane_view_angle_deg": 45,
+    "min_px_at_0.9m": 3.537379750756201,
+    "min_px_at_1.0m": 3.265264962316797,
+    "target_cell_px": 3.5,
+    "distance_boundary_m": 0.9128227233886719
+  },
+  {
+    "camera": "1280",
+    "normal_angle_deg": 49.4583981265,
+    "plane_view_angle_deg": 40.5416018735,
+    "min_px_at_0.9m": 3.1914397007167676,
+    "min_px_at_1.0m": 2.9507981032377613,
+    "target_cell_px": 3.5,
+    "distance_boundary_m": 0.7912483215332031
+  },
+  {
+    "camera": "1280",
+    "normal_angle_deg": 60,
+    "plane_view_angle_deg": 30,
+    "min_px_at_0.9m": 2.365677401695343,
+    "min_px_at_1.0m": 2.194363927085396,
+    "target_cell_px": 3.5,
+    "distance_boundary_m": 0.4710044860839844
+  },
+  {
+    "camera": "640",
+    "normal_angle_deg": 30,
+    "plane_view_angle_deg": 60,
+    "min_px_at_0.9m": 3.1134202411906995,
+    "min_px_at_1.0m": 2.8545544814719985,
+    "target_cell_px": 3.0,
+    "distance_boundary_m": 0.9416999816894531
+  },
+  {
+    "camera": "640",
+    "normal_angle_deg": 36.3360575146,
+    "plane_view_angle_deg": 53.6639424854,
+    "min_px_at_0.9m": 2.799542282904067,
+    "min_px_at_1.0m": 2.5746924646204024,
+    "target_cell_px": 3.0,
+    "distance_boundary_m": 0.8232536315917969
+  },
+  {
+    "camera": "640",
+    "normal_angle_deg": 40,
+    "plane_view_angle_deg": 50,
+    "min_px_at_0.9m": 2.614289968991084,
+    "min_px_at_1.0m": 2.4082470890019234,
+    "target_cell_px": 3.0,
+    "distance_boundary_m": 0.7489242553710938
+  },
+  {
+    "camera": "640",
+    "normal_angle_deg": 45,
+    "plane_view_angle_deg": 45,
+    "min_px_at_0.9m": 2.3582537003703883,
+    "min_px_at_1.0m": 2.176843800724323,
+    "target_cell_px": 3.0,
+    "distance_boundary_m": 0.6405296325683594
+  },
+  {
+    "camera": "640",
+    "normal_angle_deg": 49.4583981265,
+    "plane_view_angle_deg": 40.5416018735,
+    "min_px_at_0.9m": 2.127626948690528,
+    "min_px_at_1.0m": 1.9671991809931666,
+    "target_cell_px": 3.0,
+    "distance_boundary_m": 0.5365219116210938
+  },
+  {
+    "camera": "640",
+    "normal_angle_deg": 60,
+    "plane_view_angle_deg": 30,
+    "min_px_at_0.9m": 1.5771186255584975,
+    "min_px_at_1.0m": 1.4629096167192082,
+    "target_cell_px": 3.0,
+    "distance_boundary_m": null,
+    "note": "固定60度法线角的0.25m搜索下界仍未达标，边界未建立；不能把搜索下界当作可用距离。"
+  }
+]

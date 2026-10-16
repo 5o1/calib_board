@@ -1,0 +1,18 @@
+[
+  {
+    "file": "calib_board/detect.py",
+    "unchanged": true
+  },
+  {
+    "file": "calib_board/synthetic.py",
+    "unchanged": true
+  },
+  {
+    "file": "out/board_v1_1_A3.pdf",
+    "unchanged": true
+  },
+  {
+    "file": "spec/board_v1_1.json",
+    "unchanged": true
+  }
+]
