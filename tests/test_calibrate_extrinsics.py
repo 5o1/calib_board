@@ -56,14 +56,17 @@ def test_photo_cli(dataset, tmp_path):
     assert len(list((tmp_path / 'views').glob('*_overlay.png'))) == 3
 
 
-def test_photo_quick_check(dataset):
-    root, manifest, spec, _ = dataset
+def test_single_photo(dataset):
+    root, manifest, spec, truth = dataset
     save_json(root / 'single.json', {**manifest, 'observations': manifest['observations'][:1]})
-    with pytest.raises(ValueError, match='three distinct'):
-        calibrate(root / 'single.json', spec)
-    result = calibrate(root / 'single.json', spec, quick_check=True)
-    assert result['calibration_mode'] == 'quick_check'
+    result = calibrate(root / 'single.json', spec)
+    assert result['calibration_mode'] == 'single_position'
+    assert result['distinct_placements'] == 1
+    assert result['below_recommended_placements'] is True
     assert result['uncertainty']['translation_std_m'] is None
+    assert np.linalg.norm(np.array(result['T_world_camera_optical'])[:3, 3] - truth[:3, 3]) < .002
+    labelled = calibrate(root / 'single.json', spec, quick_check=True)
+    assert labelled['calibration_mode'] == 'quick_check'
 
 
 def test_repeated_photograph(dataset):
@@ -77,8 +80,9 @@ def test_distinct_photos_repeated_placement(dataset):
     root, manifest, spec, _ = dataset
     observations = [{**item, 'placement': 'center.json'} for item in manifest['observations']]
     save_json(root / 'repeated.json', {**manifest, 'observations': observations})
-    with pytest.raises(ValueError, match='three distinct'):
-        calibrate(root / 'repeated.json', spec)
+    result = calibrate(root / 'repeated.json', spec)
+    assert result['distinct_placements'] == 1
+    assert result['below_recommended_placements'] is True
 
 
 def test_wrong_camera_resolution(dataset):

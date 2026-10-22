@@ -98,27 +98,46 @@ def joint_extrinsics(detections,placements,spec):
             'uncertainty':uncertainty}
 
 
+RECOMMENDED_PLACEMENTS = 3
+
+
 def check_placements(placements, spec, quick_check=False):
-    """Enforce the acquisition requirement at user-facing solver entry points."""
+    """Count distinct board placements; any number of images is accepted.
+
+    One placement is enough to solve the pose. Fewer than RECOMMENDED_PLACEMENTS
+    makes the result depend more on that placement's measured pose and gives no
+    leave-one-out uncertainty, so the record says so instead of refusing.
+    ``quick_check`` is kept for compatibility and only labels the output.
+    """
     transforms = [placement_transform(p, spec) for p in placements]
     unique = []
     for transform in transforms:
         if not any(np.allclose(transform, other, atol=1e-6, rtol=0) for other in unique):
             unique.append(transform)
-    if not quick_check and len(unique) < 3:
-        raise ValueError('Calibration requires at least three distinct board placements; '
-                         'use --quick-check for diagnostic output only')
-    return {'calibration_mode': 'quick_check' if quick_check else 'multi_position',
+    if not unique:
+        raise ValueError('Calibration requires at least one board placement')
+    mode = 'quick_check' if quick_check else ('single_position' if len(unique) == 1 else 'multi_position')
+    return {'calibration_mode': mode,
             'distinct_placements': len(unique),
+            'recommended_placements': RECOMMENDED_PLACEMENTS,
+            'below_recommended_placements': len(unique) < RECOMMENDED_PLACEMENTS,
             'physical_accuracy_verified': False}
+
+
+def placement_warning(status):
+    if status['below_recommended_placements']:
+        return (f"Warning: {status['distinct_placements']} distinct board placement(s); "
+                f"{RECOMMENDED_PLACEMENTS} or more are recommended. The pose depends more on the "
+                "measured board placement(s), and no leave-one-out uncertainty is available.")
+    return None
 
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('detections',nargs='+',help='Detection JSON/YAML files')
     group=p.add_mutually_exclusive_group(required=True)
-    group.add_argument('--placement',help='Legacy fixed-board pose averaging; requires --quick-check')
+    group.add_argument('--placement',help='Single fixed board placement shared by all detection files')
     group.add_argument('--placements',nargs='+',help='Placement JSON/YAML files matching detection files in count and order')
-    p.add_argument('--quick-check',action='store_true',help='Allow fewer than three placements; diagnostic output only')
+    p.add_argument('--quick-check',action='store_true',help='Label the output as a diagnostic quick check (no longer required for few placements)')
     p.add_argument('--spec',default=str(DEFAULT_SPEC));p.add_argument('--output',default='build/extrinsics.json');a=p.parse_args()
     detections=[read_data(d) for d in a.detections];spec=read_data(a.spec)
     try:
@@ -126,11 +145,10 @@ def main():
             if len(a.placements)!=len(detections):p.error('--placements must match detection files in count and order')
             placements=[read_data(d) for d in a.placements]
         else:
-            if not a.quick_check:p.error('--placement is a legacy diagnostic interface; use --placements or --quick-check')
             placements=[read_data(a.placement)]
         status=check_placements(placements,spec,a.quick_check)
-        if a.quick_check:
-            print('Warning: quick-check output is diagnostic only; calibration requires at least three distinct board placements.',file=sys.stderr)
+        warning=placement_warning(status)
+        if warning:print(warning,file=sys.stderr)
         if a.placements:
             result=joint_extrinsics(detections,placements,spec)
         else:

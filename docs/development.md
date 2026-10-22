@@ -48,8 +48,8 @@ version; detect them with the matching archived specification. Saved detection
 ID/version checks are intentionally strict.
 
 The raw numerical solver functions permit diagnostic observations; the two
-extrinsic command-line entry points enforce the three-distinct-placement
-acquisition policy unless `--quick-check` is supplied. Automated input checks
+extrinsic command-line entry points accept any number of distinct placements and
+warn below the recommended three (`below_recommended_placements`). Automated input checks
 cannot certify that a measured transform is physically correct.
 
 ## Synthetic example

@@ -120,8 +120,9 @@ The rotation columns are (cos(theta),sin(theta),0), (sin(theta),−cos(theta),0)
 
 ### Capture and manifest
 
-Keep the camera, focus, and resolution fixed. Move the board to at least three
-separated locations, for example center/left/right, and measure **each** placement.
+Keep the camera, focus, and resolution fixed. Any number of placements is
+accepted, including a single image. Three or more separated locations, for example
+center/left/right, are recommended. Measure **each** placement.
 Never reuse an earlier measurement for a board that has moved. Use meaningful
 spatial separation; numeric distinctness alone does not guarantee good geometry.
 
@@ -153,8 +154,10 @@ ITERATIVE followed by `solvePnPRefineLM`. All corners have equal weight; there i
 no outlier rejection or averaging of per-image poses. Resolution and K/D must
 match. No failed image is silently skipped.
 
-Calibration mode requires at least three distinct measured transforms. Two
-transforms count as equal when all matrix entries agree within 1e-6 (zero
+Any number of distinct measured transforms is accepted. With one placement the
+result is `single_position`; with fewer than three it carries
+`below_recommended_placements: true`, a warning is printed, and leave-one-out
+uncertainty is unavailable for a single image. Two transforms count as equal when all matrix entries agree within 1e-6 (zero
 relative tolerance). Repeated image paths are rejected by the photo entry point.
 This checks the supplied data; it cannot establish that the camera was fixed or
 that the measurements describe the physical placements correctly.
@@ -188,15 +191,15 @@ python -m calib_board.extrinsics build/center_detection.json build/left_detectio
   --placements center_placement.json left_placement.json right_placement.json \
   --output build/extrinsics.json
 
-# Diagnostic only; explicitly permits a single placement.
+# A single placement is accepted (warning: below the recommended three).
 python -m calib_board.extrinsics build/center_detection.json \
-  --placement center_placement.json --quick-check --output build/quick_check.json
+  --placement center_placement.json --output build/single.json
 ```
 
-`calibrate_extrinsics` also accepts `--quick-check`. It emits a warning and marks
-the result `quick_check`. The legacy shared `--placement` interface is only
-available with that flag. A result requiring `--quick-check` must not be treated
-as a completed multi-position calibration.
+`--quick-check` is kept for compatibility; it only labels the result
+`quick_check`. The shared `--placement` interface no longer requires it. A result
+from fewer than three placements depends more on the measured placement(s) and
+should be reported with that limitation.
 
 ## Gray patches
 

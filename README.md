@@ -71,9 +71,11 @@ See [capture guidance and output interpretation](docs/calibration.md#intrinsics)
 
 ## Calibrate extrinsics
 
-Keep the camera fixed. Photograph the board in **at least three distinct,
-measured placements**. Pair each photograph with its own placement measurement
-in an [observation manifest](examples/extrinsics_manifest.json).
+Keep the camera fixed and photograph the board in one or more measured
+placements. A single image is accepted; three or more distinct placements are
+recommended because they reduce the dependence on any one placement measurement
+and enable leave-one-out uncertainty. Pair each photograph with its own placement
+measurement in an [observation manifest](examples/extrinsics_manifest.json).
 
 ```bash
 python -m calib_board.calibrate_extrinsics captures/extrinsics/manifest.json \
@@ -85,7 +87,8 @@ The solver jointly fits all world/image corner correspondences and outputs
 `T_world_camera_optical` and `[x, y, z, qw, qx, qy, qz]`, with translation in meters.
 Each placement can use two measured hole centers on a flat table or a full
 `T_world_board` transform. See [placement measurements and frames](docs/calibration.md#extrinsics).
-Use `--quick-check` explicitly for diagnostic runs with fewer placements.
+With fewer than three distinct placements the solver still writes the result,
+prints a warning and sets `below_recommended_placements: true`.
 
 ## Try without a camera
 

@@ -45,7 +45,7 @@ def test_single_image_quick_check(tmp_path, observations, option):
     output = tmp_path / 'quick.json'
     result = run_cli(detections[:1], placements[:1], output, '--quick-check', option=option)
     assert result.returncode == 0, result.stderr
-    assert 'diagnostic only' in result.stderr
+    assert 'recommended' in result.stderr
     record = read_data(output)
     assert record['calibration_mode'] == 'quick_check'
     assert record['physical_accuracy_verified'] is False
@@ -53,13 +53,16 @@ def test_single_image_quick_check(tmp_path, observations, option):
 
 
 @pytest.mark.parametrize('indices', [[0], [0, 1], [0, 0, 0]])
-def test_reject_insufficient_distinct_placements(tmp_path, observations, indices):
-    detections, placements, _ = observations
-    output = tmp_path / 'rejected.json'
+def test_accept_few_distinct_placements(tmp_path, observations, indices):
+    detections, placements, truth = observations
+    output = tmp_path / 'few.json'
     result = run_cli([detections[i] for i in indices], [placements[i] for i in indices], output)
-    assert result.returncode != 0
-    assert 'three distinct board placements' in result.stderr
-    assert not output.exists()
+    assert result.returncode == 0, result.stderr
+    assert 'recommended' in result.stderr
+    record = read_data(output)
+    assert record['distinct_placements'] == len(set(indices))
+    assert record['below_recommended_placements'] is True
+    assert np.allclose(record['T_world_camera_optical'], truth, atol=1e-6)
 
 
 def test_joint_cli(tmp_path, observations):

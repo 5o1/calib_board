@@ -7,7 +7,7 @@ import cv2
 
 from .common import DEFAULT_SPEC, intrinsics, read_data, save_data, save_json
 from .detect import detect
-from .extrinsics import check_placements, joint_extrinsics, placement_transform
+from .extrinsics import check_placements, joint_extrinsics, placement_transform, placement_warning
 
 
 def calibrate(manifest_path, spec, intrinsics_path=None, quick_check=False, diagnostics_dir=None):
@@ -62,15 +62,16 @@ def main():
     parser.add_argument('--spec', default=str(DEFAULT_SPEC), help='Matching board specification')
     parser.add_argument('--output', default='build/extrinsics.json', help='World camera pose and diagnostics (.json/.yaml)')
     parser.add_argument('--diagnostics-dir', help='Optional directory for detections and overlays')
-    parser.add_argument('--quick-check', action='store_true', help='Allow fewer than three placements; diagnostic output only')
+    parser.add_argument('--quick-check', action='store_true', help='Label the output as a diagnostic quick check (no longer required for few placements)')
     args = parser.parse_args()
     try:
         result = calibrate(args.manifest, read_data(args.spec), args.intrinsics, args.quick_check, args.diagnostics_dir)
         save_data(args.output, result)
     except (ValueError, OSError, KeyError, cv2.error) as exc:
         parser.error(str(exc))
-    if args.quick_check:
-        print('Warning: quick-check output is diagnostic only; calibration requires at least three distinct board placements.', file=sys.stderr)
+    warning = placement_warning(result)
+    if warning:
+        print(warning, file=sys.stderr)
     print(f"Used {result['images']} images, {result['distinct_placements']} placements; "
           f"median {result['reprojection_median_px']:.4f} px. Saved {args.output}")
 
