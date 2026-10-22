@@ -24,6 +24,7 @@ contact a camera, robot, or remote machine.
 
 | Module | Role |
 | --- | --- |
+| `calib_board.placement_planner` | Local static form and SVG planner for four hole centers |
 | `calib_board.generate` | Deterministic vector PDF and 300 DPI preview |
 | `calib_board.intrinsics` | Image collection, ChArUco detection without prior K/D, pinhole intrinsic solve |
 | `calib_board.detect` | Known-intrinsic board pose and corner overlay |
@@ -64,3 +65,13 @@ python -m calib_board.calibrate_extrinsics build/demo/manifest.json \
 The renderer uses a pinhole camera with zero distortion, PDF rasterization,
 light blur, and deterministic noise. A separate test remaps rendered images to exercise nonzero
 distortion. Neither constitutes physical validation.
+
+## Placement planner checks
+
+```bash
+node --test tests/test_placement_geometry.cjs
+```
+
+These checks use Node.js 18+ and require no npm dependencies. The planner itself
+uses browser APIs and a Python standard-library launcher. See the
+[planner guide](placement-planner.md) for its coordinate and export contract.

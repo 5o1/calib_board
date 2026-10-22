@@ -40,6 +40,20 @@ To regenerate the vector PDF and its 300 DPI preview:
 python -m calib_board.generate
 ```
 
+## Plan board placements
+
+Open a standalone visual form for four measured mounting-hole centers:
+
+```bash
+python -m calib_board.placement_planner
+```
+
+The browser shows a configurable tabletop, schematic camera direction, colored
+candidate positions, and four edge-distance dimensions for each rotated board.
+Drafts stay in the browser; export/import JSON to keep them, or export the diagram
+as SVG. The launcher uses only the Python standard library. See the
+[placement planner guide](docs/placement-planner.md) for coordinates and usage.
+
 ## Calibrate intrinsics
 
 Capture 15–30 sharp views at the intended resolution and focus setting. Move and

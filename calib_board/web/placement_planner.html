@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>标定板位置规划 · Calibration Board</title>
+<style>
+:root{font-family:Inter,"Segoe UI","Microsoft YaHei",sans-serif;color:#172b42;background:#f3f6fa;font-size:14px}
+*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}
+button{cursor:pointer;border:1px solid #d8e1eb;background:white;color:#253b53;border-radius:8px;padding:9px 13px}
+button:hover{background:#edf3fa}button.primary{background:#245ee7;color:white;border-color:#245ee7}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #b6ceff;outline-offset:2px}
+input,select{border:1px solid #d5dfeb;border-radius:6px;padding:8px;background:#fff;min-width:0}
+input[type=number]{width:100%;font-variant-numeric:tabular-nums}input:invalid{border-color:#c53e38}
+header{padding:23px 30px 18px;background:#fff;border-bottom:1px solid #dce4ee}
+.eyebrow{font-size:11px;letter-spacing:.14em;color:#637c98;text-transform:uppercase;font-weight:700}
+h1{margin:6px 0;font-size:25px;letter-spacing:-.03em}h2{margin:0;font-size:16px}
+.subtle{color:#6a7d93;line-height:1.6}.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px}
+#save-status{font-size:12px;color:#668077;margin-left:auto}
+main{display:grid;grid-template-columns:355px minmax(0,1fr);gap:20px;padding:22px 26px;max-width:1800px;margin:auto}
+.panel,.card{background:#fff;border:1px solid #dce4ee;border-radius:12px}
+.settings{padding:17px;margin-bottom:16px}.settings h2{margin-bottom:13px}
+.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-size:12px;color:#556d87}.settings .wide{grid-column:1/-1}
+.list-heading{display:flex;justify-content:space-between;align-items:center;margin:18px 0 12px}
+.card{margin-bottom:12px;padding:14px;border-left:4px solid var(--color);transition:box-shadow .12s}
+.card.active{box-shadow:0 0 0 2px #d9e6ff}.card-head{display:flex;align-items:center;gap:8px}
+.card-head input[type=color]{width:29px;height:30px;padding:2px;border:0;flex:none}
+.card-head input.name{font-weight:650;flex:1;width:0;border-color:transparent;padding-left:3px}
+.card-head button{padding:5px 7px;font-size:13px;flex:none;white-space:nowrap}.card-options{display:flex;align-items:center;gap:9px;margin:8px 0;color:#60758b;font-size:12px}
+.card-options label{display:flex;align-items:center;gap:4px}.card-options button{margin-left:auto;padding:4px 9px;font-size:12px}
+table{border-collapse:collapse;width:100%;table-layout:fixed}th{font-size:11px;color:#637a92;font-weight:500;text-align:left;padding:5px 3px}
+td{padding:4px 3px}th:first-child{width:34px}td:first-child{font-weight:700;font-size:12px}
+.summary{font-size:12px;line-height:1.7;margin-top:9px;color:#5b7289}.summary strong{color:#273e56}
+.dimensions-summary{display:grid;grid-template-columns:1fr 1fr;font-variant-numeric:tabular-nums;font-size:11px;margin-top:4px}
+.warning{color:#a54d13}.error{color:#b12b32}#message{padding:0 30px;color:#a33434;margin-top:10px}
+.visual-column{min-width:0}.visual{position:sticky;top:18px;overflow:hidden}
+.visual-head{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid #e8edf3;gap:15px}
+.visual-head label{font-size:12px;color:#60758b;display:flex;align-items:center;gap:7px}
+.canvas-scroll{overflow:auto;background:#fafcff}.canvas-scroll svg{display:block;width:100%;min-width:740px;min-height:490px;max-height:760px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;padding:12px 20px;border-top:1px solid #e8edf3}
+.legend button{display:flex;align-items:center;gap:7px;border:0;padding:3px 0;font-size:12px;background:none}
+.swatch{width:11px;height:11px;border-radius:3px;display:inline-block}
+.visual-note{padding:0 20px 17px;font-size:12px;color:#647b92;line-height:1.8}
+.help{padding:16px 18px;margin-top:16px;font-size:12px;line-height:1.8;color:#60758b}
+.help b{color:#294560}.empty{padding:24px 15px;text-align:center;color:#71849a;border:1px dashed #b9c9dc;border-radius:10px}
+@media(min-width:1100px){.sidebar{max-height:calc(100vh - 190px);overflow:auto;padding:2px 5px 4px 2px}}
+@media(max-width:1000px){main{grid-template-columns:1fr;padding:16px}.visual-column{grid-row:1}.visual{position:static}.sidebar{display:grid;grid-template-columns:1fr 1fr;gap:16px}.settings{margin:0}.list-heading{margin-top:0}.help{grid-column:1/-1}header{padding:20px}#save-status{width:100%;margin:0}}
+@media(max-width:620px){.sidebar{display:block}.settings{margin-bottom:18px}.visual-head{align-items:flex-start;flex-direction:column}.toolbar button{flex:1}h1{font-size:22px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">Calibration Board / Placement Planner</div>
+  <h1>标定板候选位置</h1>
+  <div class="subtle">填写四个孔中心坐标，对照俯视图检查位置与测量距离。</div>
+  <div class="toolbar">
+    <button id="add" class="primary">＋ 添加位置</button>
+    <button id="export-json">导出位置 JSON</button>
+    <button id="import-json">导入位置 JSON</button>
+    <button id="export-svg">导出示意图 SVG</button>
+    <input id="file-input" type="file" accept=".json,application/json" hidden>
+    <span id="save-status" role="status"></span>
+  </div>
+</header>
+<div id="message" role="alert"></div>
+<main>
+  <aside class="sidebar">
+    <section class="panel settings">
+      <h2>桌面与朝向</h2>
+      <div class="settings-grid">
+        <div class="field"><label for="table-width">左右宽度 · Y（mm）</label><input id="table-width" type="number" min="1" step="1"></div>
+        <div class="field"><label for="table-depth">前后深度 · X（mm）</label><input id="table-depth" type="number" min="1" step="1"></div>
+        <div class="field wide"><label for="camera-edge">相机位于哪一侧（仅示意）</label>
+          <select id="camera-edge"><option value="back">后沿，朝向桌内</option><option value="front">前沿，朝向桌内</option><option value="left">左侧，朝向桌内</option><option value="right">右侧，朝向桌内</option></select>
+        </div>
+      </div>
+    </section>
+    <section><div class="list-heading"><h2>候选位置列表</h2><span id="count" class="subtle"></span></div><div id="placements"></div></section>
+    <section class="panel help">
+      <b>测量基准</b><br>
+      H1–H4 指板上四个孔的中心，编号沿纸面顺时针排列。<br>
+      X = 距后沿，Y = 距左侧边，均为垂直距离，单位 mm。<br>
+      新建项的坐标只是初始布局，请替换为计划值或实测值。
+    </section>
+  </aside>
+  <section class="visual-column">
+    <div class="panel visual">
+      <div class="visual-head"><div><h2>工作桌俯视图</h2><span class="subtle" id="table-caption"></span></div>
+        <label><input id="selected-only" type="checkbox">仅显示当前项尺寸</label>
+      </div>
+      <div class="canvas-scroll"><svg id="scene" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="桌面、相机朝向、候选标定板位置与四条测量尺寸线"></svg></div>
+      <div class="legend" id="legend"></div>
+      <div class="visual-note">每块板自动选择最近桌角：b 标两条距离，邻点 a、c 各标一条。
+        半透明四边形连接 H1–H4 孔中心；相机图标只用于辨认朝向。</div>
+    </div>
+  </section>
+</main>
+<script src="placement_model.js"></script>
+<script src="placement_planner.js"></script>
+</body>
+</html>
